@@ -1,0 +1,21 @@
+seleniumhub:
+  image: selenium/hub
+  ports:
+  - 4444:4444
+
+
+chromenode:
+  image: selenium/node-chrome:3.8.1
+  environment:
+    SCREEN_WIDTH: 2880
+    SCREEN_HEIGHT: 1800
+  ports:
+  - 5900
+  links:
+  - seleniumhub:hub
+
+zaproxy:
+  image: owasp/zap2docker-stable
+  command: zap.sh -daemon -port 8080 -host 0.0.0.0 -config api.addrs.addr.name=.* -config api.addrs.addr.regex=true -config api.key=mickey
+  ports:
+  - 8080:8080

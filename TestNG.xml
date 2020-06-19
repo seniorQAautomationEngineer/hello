@@ -1,0 +1,46 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+
+<suite name="Sanity Test Suite" parallel= "none">
+
+  <test name="Chrome test cases">
+
+    <parameter name="testBox" value="web"/>
+    <parameter name="version" value="59.0"/>
+    <parameter name="browser" value="chrome"/>
+    <parameter name="platform" value="Windows 10"/>
+
+    <classes>
+      <class name="LoginTests"/>
+
+
+    </classes>
+
+  </test>
+
+
+<!--  <test name="Firefox test cases">-->
+<!--    <parameter name="testBox" value="sauce"/>-->
+<!--    <parameter name="version" value="68.0"/>-->
+<!--    <parameter name="browser" value="Firefox"/>-->
+<!--    <parameter name="platform" value="macOS 10.14"/>-->
+<!--    <classes>-->
+<!--      <class name="LoginTests"/>-->
+<!--    </classes>-->
+<!--  </test>-->
+
+
+<!--  <test name="Safari Mac test cases">-->
+<!--    <parameter name="testBox" value="sauce"/>-->
+<!--    <parameter name="version" value="12.1"/>-->
+<!--    <parameter name="browser" value="Safari"/>-->
+<!--    <parameter name="platform" value="macOS 10.13"/>-->
+<!--    <classes>-->
+<!--      <class name="LoginTests"/>-->
+<!--    </classes>-->
+<!--  </test>-->
+
+
+</suite>
+
+
