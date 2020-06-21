@@ -1,3 +1,5 @@
+package com.hellosign.email;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -39,7 +41,7 @@ public class EmailUtils {
     }
 
     /**
-     * Uses email.username and email.password properties from the properties file. Reads from Inbox folder of the email application
+     * Uses com.hellosign.email.username and com.hellosign.email.password properties from the properties file. Reads from Inbox folder of the com.hellosign.email application
      * @throws MessagingException
      */
     public EmailUtils() throws MessagingException {
@@ -47,8 +49,8 @@ public class EmailUtils {
     }
 
     /**
-     * Uses username and password in properties file to read from a given folder of the email application
-     * @param emailFolder Folder in email application to interact with
+     * Uses username and password in properties file to read from a given folder of the com.hellosign.email application
+     * @param emailFolder Folder in com.hellosign.email application to interact with
      * @throws MessagingException
      */
     public EmailUtils(EmailFolder emailFolder) throws MessagingException {
@@ -59,16 +61,16 @@ public class EmailUtils {
     }
 
     /**
-     * Connects to email server with credentials provided to read from a given folder of the email application
-     * @param username Email username (e.g. janedoe@email.com)
-     * @param password Email password
-     * @param server Email server (e.g. smtp.email.com)
-     * @param emailFolder Folder in email application to interact with
+     * Connects to com.hellosign.email server with credentials provided to read from a given folder of the com.hellosign.email application
+     * @param username com.hellosign.pages.Email username (e.g. janedoe@com.hellosign.email.com)
+     * @param password com.hellosign.pages.Email password
+     * @param server com.hellosign.pages.Email server (e.g. smtp.com.hellosign.email.com)
+     * @param emailFolder Folder in com.hellosign.email application to interact with
      */
     public EmailUtils(String username, String password, String server, EmailFolder emailFolder) throws MessagingException {
         Properties props = System.getProperties();
         try {
-            props.load(new FileInputStream(new File("C:\\Users\\oleksii.lavrenin\\Downloads\\hellosign\\src\\main\\resources\\email.properties")));
+            props.load(new FileInputStream(new File("C:\\Users\\oleksii.lavrenin\\Downloads\\hellosign\\src\\main\\resources\\com.hellosign.email.properties")));
         } catch(Exception e) {
             e.printStackTrace();
             System.exit(-1);
@@ -88,27 +90,27 @@ public class EmailUtils {
     //************* GET EMAIL PROPERTIES *******************
 
     public static String getEmailAddressFromProperties(){
-        return System.getProperty("email.address");
+        return System.getProperty("com.hellosign.email.address");
     }
 
     public static String getEmailUsernameFromProperties(){
-        return System.getProperty("email.username");
+        return System.getProperty("com.hellosign.email.username");
     }
 
     public static String getEmailPasswordFromProperties(){
-        return System.getProperty("email.password");
+        return System.getProperty("com.hellosign.email.password");
     }
 
     public static String getEmailProtocolFromProperties(){
-        return System.getProperty("email.protocol");
+        return System.getProperty("com.hellosign.email.protocol");
     }
 
     public static int getEmailPortFromProperties(){
-        return Integer.parseInt(System.getProperty("email.port"));
+        return Integer.parseInt(System.getProperty("com.hellosign.email.port"));
     }
 
     public static String getEmailServerFromProperties(){
-        return System.getProperty("email.server");
+        return System.getProperty("com.hellosign.email.server");
     }
 
 
@@ -180,7 +182,7 @@ public class EmailUtils {
     }
 
     /**
-     * Returns HTML of the email's content
+     * Returns HTML of the com.hellosign.email's content
      */
     public String getMessageContent(Message message) throws Exception {
         StringBuilder builder = new StringBuilder();
@@ -193,15 +195,18 @@ public class EmailUtils {
     }
 
     /**
-     * Returns all urls from an email message with the linkText specified
+     * Returns all urls from an com.hellosign.email message with the linkText specified
      */
     public List<String> getUrlsFromMessage(Message message, String linkText) throws Exception{
         String html = getMessageContent(message);
         List<String> allMatches = new ArrayList<String>();
-        Matcher matcher = Pattern.compile("(<a [^>]+>)"+linkText+"</a>").matcher(html);
+        Matcher matcher = Pattern.compile("(<a [^>]+>)View Document</a>").matcher(html);
         while (matcher.find()) {
             String aTag = matcher.group(1);
-            allMatches.add(aTag.substring(aTag.indexOf("http"), aTag.indexOf("\">")));
+            String startStr = aTag.substring(aTag.indexOf("href=\"") + 6);
+            String result = startStr.substring(0, startStr.indexOf('\"'));
+            allMatches.add(result);
+            //  allMatches.add(aTag.substring(aTag.indexOf("http"), aTag.indexOf("\">")));
         }
         return allMatches;
     }
@@ -224,9 +229,9 @@ public class EmailUtils {
 
     /**
      * Gets text from the end of a line.
-     * In this example, the subject of the email is 'Authorization Code'
+     * In this example, the subject of the com.hellosign.email is 'Authorization Code'
      * And the line to get the text from begins with 'Authorization code:'
-     * Change these items to whatever you need for your email. This is only an example.
+     * Change these items to whatever you need for your com.hellosign.email. This is only an example.
      */
     public String getAuthorizationCode() throws Exception {
         Message email = getMessagesBySubject("Authorization Code", true, 5)[0];
@@ -245,9 +250,9 @@ public class EmailUtils {
 
     /**
      * Gets one line of text
-     * In this example, the subject of the email is 'Authorization Code'
+     * In this example, the subject of the com.hellosign.email is 'Authorization Code'
      * And the line preceding the code begins with 'Authorization code:'
-     * Change these items to whatever you need for your email. This is only an example.
+     * Change these items to whatever you need for your com.hellosign.email. This is only an example.
      */
     public String getVerificationCode() throws Exception {
         Message email = getMessagesBySubject("Authorization Code", true, 5)[0];
@@ -267,12 +272,12 @@ public class EmailUtils {
     //************* BOOLEAN METHODS *******************
 
     /**
-     * Searches an email message for a specific string
+     * Searches an com.hellosign.email message for a specific string
      */
     public boolean isTextInMessage(Message message, String text) throws Exception {
         String content = getMessageContent(message);
 
-        //Some Strings within the email have whitespace and some have break coding. Need to be the same.
+        //Some Strings within the com.hellosign.email have whitespace and some have break coding. Need to be the same.
         content = content.replace("&nbsp;", " ");
         return content.contains(text);
     }

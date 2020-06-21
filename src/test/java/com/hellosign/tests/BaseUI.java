@@ -1,3 +1,7 @@
+package com.hellosign.tests;
+
+import com.hellosign.data.Data;
+import com.hellosign.pages.*;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -16,6 +20,7 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.asserts.SoftAssert;
 
+import com.hellosign.utility.Reports;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -180,7 +185,7 @@ public class BaseUI {
 
         driver.get(Data.mainUrl);
 //        if (env.contains("https://app.hellosign.com")) {
-//            driver.get(Data.mainUrl);
+//            driver.get(com.hellosign.data.Data.mainUrl);
 //        } else if (env.contains("uat")) {
 //            driver.get("https://app.hellosign.com");
 //        } else if (env.contains("prod")) {

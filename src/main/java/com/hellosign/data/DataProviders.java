@@ -1,13 +1,36 @@
+package com.hellosign.data;
+
 import org.testng.annotations.DataProvider;
 
 public class DataProviders {
-    @DataProvider(name = "Different extensions of documents")
-    public static Object[][] testRegistration2() {
+    @DataProvider(name = "Different combinations of documents and signatures")
+    public static Object[][] completeDocument() {
         return new Object[][]{
+//                {Data.signingOptionJustMe, Data.pathToPdfFile, Data.savedSignatures},
+                {Data.signingOptionJustMe, Data.pathToPdfFile, Data.drawItIn},
+//                {Data.signingOptionJustMe, Data.pathToPdfFile, Data.typeItIn},
+//                {Data.signingOptionJustMe, Data.pathToPdfFile, Data.uploadImage},
+//                {Data.signingOptionJustMe, Data.pathToPdfFile, Data.useSmartphone},
+//                {Data.signingOptionMeAndOthers, Data.pathToPdfFile, ""},
+//                {Data.signingOptionJustOthers, Data.pathToPdfFile, ""},
+//
+//                {Data.signingOptionJustMe, Data.pathToDocFile, Data.savedSignatures},
+//                {Data.signingOptionJustMe, Data.pathToDocFile, Data.drawItIn},
+//                {Data.signingOptionJustMe, Data.pathToDocFile, Data.typeItIn},
+//                {Data.signingOptionJustMe, Data.pathToDocFile, Data.uploadImage},
+//                {Data.signingOptionJustMe, Data.pathToDocFile, Data.useSmartphone},
+//                {Data.signingOptionMeAndOthers, Data.pathToDocFile, ""},
+//                {Data.signingOptionJustOthers, Data.pathToDocFile, ""},
 
-               // {Data.pathToDocFile},
-                {Data.pathToPdfFile},
-//                {Data.pathToJpegFile},
+//                {Data.signingOptionJustMe, Data.pathToJpegFile, Data.savedSignatures},
+//                {Data.signingOptionJustMe, Data.pathToJpegFile, Data.drawItIn},
+//                  {Data.signingOptionJustMe, Data.pathToJpegFile, Data.typeItIn},
+//                {Data.signingOptionJustMe, Data.pathToJpegFile, Data.uploadImage},
+//                {Data.signingOptionJustMe, Data.pathToJpegFile, Data.useSmartphone},
+//
+//
+//                {Data.signingOptionMeAndOthers, Data.pathToJpegFile, ""},
+//                {Data.signingOptionJustOthers, Data.pathToJpegFile, ""}
 
         };
     }
@@ -16,9 +39,9 @@ public class DataProviders {
 //    public static Object[][] testRegistration2() {
 //        return new Object[][]{
 //
-//                {Data.email1, Data.nickname, true},
-//             //   {Data.emai2, Data.nickname, false},
-//             //   {Data.emai3, Data.nickname, true},
+//                {com.hellosign.data.Data.email1, com.hellosign.data.Data.nickname, true},
+//             //   {com.hellosign.data.Data.emai2, com.hellosign.data.Data.nickname, false},
+//             //   {com.hellosign.data.Data.emai3, com.hellosign.data.Data.nickname, true},
 //
 //        };
 //    }
@@ -28,8 +51,8 @@ public class DataProviders {
 //        ArrayList<Object[]> out = new ArrayList<>();
 //        Files.readAllLines(Paths.get("Registration.csv")).stream().forEach(s -> {
 //
-//            String[] data = s.split(",");
-//            out.add(new Object[]{data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7]});
+//            String[] com.hellosign.data = s.split(",");
+//            out.add(new Object[]{com.hellosign.data[0], com.hellosign.data[1], com.hellosign.data[2], com.hellosign.data[3], com.hellosign.data[4], com.hellosign.data[5], com.hellosign.data[6], com.hellosign.data[7]});
 //
 //        });
 //

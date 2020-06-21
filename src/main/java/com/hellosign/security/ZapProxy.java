@@ -1,3 +1,6 @@
+package com.hellosign.security;
+
+import com.hellosign.api.ApiRequests;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -11,7 +14,6 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.testng.Assert;
-import org.testng.TestListenerAdapter;
 import org.testng.TestNG;
 import org.testng.annotations.Test;
 import org.testng.collections.Lists;
@@ -30,6 +32,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ZapProxy {
+    com.hellosign.api.ApiRequests apiRequests  = new ApiRequests();
+
+
     @Test
     public void zapActions() throws Exception {
         activateZapInDaemoMode();
@@ -82,15 +87,15 @@ public class ZapProxy {
 
     @Test
     public void updateZapCertificate() throws Exception {
-        BackendProcesses backendProcesses = new BackendProcesses();
+
         File file = new File("rootcert.cer");
-       // HttpResponse response = backendProcesses.login("http://localhost:8080/OTHER/core/other/rootcert?apikey=ueueuei");
-       // Files.write(Paths.get("rootcert.cer"), EntityUtils.toString(response.getEntity()).getBytes(), StandardOpenOption.CREATE);
+        String  response = apiRequests.zapCertificate("http://localhost:8080/OTHER/core/other/rootcert?apikey=ueueuei");
+        Files.write(Paths.get("rootcert.cer"), response.getBytes(), StandardOpenOption.CREATE);
 
         KeyStore ks = KeyStore.getInstance(KeyStore.getDefaultType());
         char[] password = "changeit".toCharArray();
         char sep = File.separatorChar;
-        File certFile = new File(System.getProperty("java.home") + sep + "lib" + sep + "security" + sep + "cacerts");
+        File certFile = new File(System.getProperty("java.home") + sep + "lib" + sep + "com/hellosign/security" + sep + "cacerts");
         System.out.println(certFile);
         FileInputStream in = new FileInputStream(certFile);
         ks.load(in, password);
@@ -203,7 +208,7 @@ public class ZapProxy {
     // @Test
     public void sendRequestUsingProxy() throws IOException {
         String cookies = "ExampleOfcookies";
-        System.setProperty("javax.net.ssl.trustStore", "C:\\Program Files\\Java\\jdk1.8.0_191\\jre\\lib\\security\\cacerts");
+        System.setProperty("javax.net.ssl.trustStore", "C:\\Program Files\\Java\\jdk1.8.0_191\\jre\\lib\\com.hellosign.security\\cacerts");
 
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
