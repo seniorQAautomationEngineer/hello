@@ -10,21 +10,21 @@ import java.util.ArrayList;
 
 public class Email extends BaseActions {
 
-     By PASSWORD_GMAIL = By.xpath("//input[contains(@name, 'password')]");
-     By EMAIL_GMAIL =  By.xpath(".//input[contains(@id, 'identifierId')]");
-     By EMAIL_NEXT_BUTTON = By.xpath(".//div[contains(@id, 'identifierNext')]");
-     By PASSWORD_NEXT_BUTTON =  By.xpath(".//div[contains(@id, 'passwordNext')]");
-     By GOOGLE_APPS  =  By.xpath(".//a[@aria-label='Google apps']/../a");
-     By GOOGLE_APPS_IFRAME  = By.xpath("//iframe[contains(@id, 'I0')]") ;
-     By GMAIL_ICON  =  By.xpath("//span[@pid='23']") ;
-     By SEARCH_INPUT =  By.xpath(".//form[@role='search']//input[@type='text']/../input");
-     By SEARCH_BUTTON = By.xpath(".//button[@aria-label='Search mail']");
+    By PASSWORD_GMAIL = By.xpath("//input[contains(@name, 'password')]");
+    By EMAIL_GMAIL = By.xpath(".//input[contains(@id, 'identifierId')]");
+    By EMAIL_NEXT_BUTTON = By.xpath(".//div[contains(@id, 'identifierNext')]");
+    By PASSWORD_NEXT_BUTTON = By.xpath(".//div[contains(@id, 'passwordNext')]");
+    By GOOGLE_APPS = By.xpath(".//a[@aria-label='Google apps']/../a");
+    By GOOGLE_APPS_IFRAME = By.xpath("//iframe[contains(@id, 'I0')]");
+    By GMAIL_ICON = By.xpath("//span[@pid='23']");
+    By SEARCH_INPUT = By.xpath(".//form[@role='search']//input[@type='text']/../input");
+    By SEARCH_BUTTON = By.xpath(".//button[@aria-label='Search mail']");
 
     public Email(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
     }
 
-    public void openGmail(){
+    public void openGmail() {
         String providerGmail = "ukrainiandreams1000@gmail.com";
         driver.get("https://accounts.google.com/AccountChooser?service=mail&amp;continue=https://mail.google.com/mail/");
 
@@ -41,7 +41,7 @@ public class Email extends BaseActions {
         driver.findElement(PASSWORD_NEXT_BUTTON).click();
     }
 
-    public void findMessageAndClickLinkOnGmail(String newProviderEmail){
+    public void findMessageAndClickLinkOnGmail(String newProviderEmail) {
 
         wait.until(ExpectedConditions.elementToBeClickable(SEARCH_INPUT));
         driver.findElement(SEARCH_INPUT).sendKeys(newProviderEmail);

@@ -16,8 +16,8 @@ public class CreateDocument extends BaseUI {
 
     @Video
     @Test(dataProvider = "Different combinations of documents and signatures", dataProviderClass = DataProviders.class,
-            priority = 1, enabled = testCase1, groups = {"businessAccount"})
-    //,  retryAnalyzer = com.hellosign.tests.RetryAnalyzer.class
+            priority = 1, enabled = testCase1, groups = {"businessAccount"}, retryAnalyzer = com.hellosign.tests.RetryAnalyzer.class)
+
 
     public void setUpDocument(String signingOption, String pathToFile, String typesOfSignatures) {
         homePage.loginAsRegisteredUser(Data.emailUser1, Data.password);
@@ -51,7 +51,7 @@ public class CreateDocument extends BaseUI {
             documentEditMode.addNewCheckboxToDocument();
             documentEditMode.clickContinueButtonInEditMode();
         }
-         signPage.clickSubmitButton();
+      //  signPage.clickSubmitButton();
 
     }
 }

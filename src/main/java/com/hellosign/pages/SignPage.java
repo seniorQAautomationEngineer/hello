@@ -19,7 +19,6 @@ public class SignPage extends BaseActions {
     By BUTTON_SEND_SUBMIT = By.xpath("//button[@id='tsm_group_send_submit']");
 
 
-
     public SignPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
     }
@@ -62,7 +61,7 @@ public class SignPage extends BaseActions {
         ajaxClick(BUTTON_FILL_OUT_AND_SIGN);
     }
 
-    public void clickSubmitButton(){
+    public void clickSubmitButton() {
         wait.until(ExpectedConditions.elementToBeClickable(BUTTON_SEND_SUBMIT));
         driver.findElement(BUTTON_SEND_SUBMIT);
     }

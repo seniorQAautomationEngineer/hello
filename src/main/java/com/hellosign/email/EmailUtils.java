@@ -31,7 +31,7 @@ public class EmailUtils {
 
         private String text;
 
-        private EmailFolder(String text){
+        private EmailFolder(String text) {
             this.text = text;
         }
 
@@ -42,6 +42,7 @@ public class EmailUtils {
 
     /**
      * Uses com.hellosign.email.username and com.hellosign.email.password properties from the properties file. Reads from Inbox folder of the com.hellosign.email application
+     *
      * @throws MessagingException
      */
     public EmailUtils() throws MessagingException {
@@ -50,6 +51,7 @@ public class EmailUtils {
 
     /**
      * Uses username and password in properties file to read from a given folder of the com.hellosign.email application
+     *
      * @param emailFolder Folder in com.hellosign.email application to interact with
      * @throws MessagingException
      */
@@ -62,16 +64,17 @@ public class EmailUtils {
 
     /**
      * Connects to com.hellosign.email server with credentials provided to read from a given folder of the com.hellosign.email application
-     * @param username com.hellosign.pages.Email username (e.g. janedoe@com.hellosign.email.com)
-     * @param password com.hellosign.pages.Email password
-     * @param server com.hellosign.pages.Email server (e.g. smtp.com.hellosign.email.com)
+     *
+     * @param username    com.hellosign.pages.Email username (e.g. janedoe@com.hellosign.email.com)
+     * @param password    com.hellosign.pages.Email password
+     * @param server      com.hellosign.pages.Email server (e.g. smtp.com.hellosign.email.com)
      * @param emailFolder Folder in com.hellosign.email application to interact with
      */
     public EmailUtils(String username, String password, String server, EmailFolder emailFolder) throws MessagingException {
         Properties props = System.getProperties();
         try {
             props.load(new FileInputStream(new File("C:\\Users\\oleksii.lavrenin\\Downloads\\hellosign\\src\\main\\resources\\com.hellosign.email.properties")));
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             System.exit(-1);
         }
@@ -86,39 +89,36 @@ public class EmailUtils {
     }
 
 
-
     //************* GET EMAIL PROPERTIES *******************
 
-    public static String getEmailAddressFromProperties(){
+    public static String getEmailAddressFromProperties() {
         return System.getProperty("com.hellosign.email.address");
     }
 
-    public static String getEmailUsernameFromProperties(){
+    public static String getEmailUsernameFromProperties() {
         return System.getProperty("com.hellosign.email.username");
     }
 
-    public static String getEmailPasswordFromProperties(){
+    public static String getEmailPasswordFromProperties() {
         return System.getProperty("com.hellosign.email.password");
     }
 
-    public static String getEmailProtocolFromProperties(){
+    public static String getEmailProtocolFromProperties() {
         return System.getProperty("com.hellosign.email.protocol");
     }
 
-    public static int getEmailPortFromProperties(){
+    public static int getEmailPortFromProperties() {
         return Integer.parseInt(System.getProperty("com.hellosign.email.port"));
     }
 
-    public static String getEmailServerFromProperties(){
+    public static String getEmailServerFromProperties() {
         return System.getProperty("com.hellosign.email.server");
     }
 
 
-
-
     //************* EMAIL ACTIONS *******************
 
-    public void openEmail(Message message) throws Exception{
+    public void openEmail(Message message) throws Exception {
         message.getContent();
     }
 
@@ -126,7 +126,7 @@ public class EmailUtils {
         return folder.getMessageCount();
     }
 
-    public int getNumberOfUnreadMessages()throws MessagingException {
+    public int getNumberOfUnreadMessages() throws MessagingException {
         return folder.getUnreadMessageCount();
     }
 
@@ -137,7 +137,7 @@ public class EmailUtils {
         return folder.getMessage(index);
     }
 
-    public Message getLatestMessage() throws MessagingException{
+    public Message getLatestMessage() throws MessagingException {
         return getMessageByIndex(getNumberOfMessages());
     }
 
@@ -158,22 +158,23 @@ public class EmailUtils {
 
     /**
      * Searches for messages with a specific subject
-     * @param subject Subject to search messages for
-     * @param unreadOnly Indicate whether to only return matched messages that are unread
+     *
+     * @param subject     Subject to search messages for
+     * @param unreadOnly  Indicate whether to only return matched messages that are unread
      * @param maxToSearch maximum number of messages to search, starting from the latest. For example, enter 100 to search through the last 100 messages.
      */
-    public Message[] getMessagesBySubject(String subject, boolean unreadOnly, int maxToSearch) throws Exception{
+    public Message[] getMessagesBySubject(String subject, boolean unreadOnly, int maxToSearch) throws Exception {
         Map<String, Integer> indices = getStartAndEndIndices(maxToSearch);
 
         Message messages[] = folder.search(
                 new SubjectTerm(subject),
                 folder.getMessages(indices.get("startIndex"), indices.get("endIndex")));
-        if(unreadOnly){
+        if (unreadOnly) {
             List<Message> unreadMessages = new ArrayList<Message>();
             for (Message message : messages) {
-               if(isMessageUnread(message)) {
+                if (isMessageUnread(message)) {
                     unreadMessages.add(message);
-               }
+                }
             }
             messages = unreadMessages.toArray(new Message[]{});
         }
@@ -197,7 +198,7 @@ public class EmailUtils {
     /**
      * Returns all urls from an com.hellosign.email message with the linkText specified
      */
-    public List<String> getUrlsFromMessage(Message message, String linkText) throws Exception{
+    public List<String> getUrlsFromMessage(Message message, String linkText) throws Exception {
         String html = getMessageContent(message);
         List<String> allMatches = new ArrayList<String>();
         Matcher matcher = Pattern.compile("(<a [^>]+>)View Document</a>").matcher(html);
@@ -216,7 +217,7 @@ public class EmailUtils {
         int startIndex = endIndex - max;
 
         //In event that maxToGet is greater than number of messages that exist
-        if(startIndex < 1){
+        if (startIndex < 1) {
             startIndex = 1;
         }
 
@@ -241,7 +242,7 @@ public class EmailUtils {
         String prefix = "Authorization code:";
 
         while ((line = reader.readLine()) != null) {
-            if(line.startsWith(prefix)) {
+            if (line.startsWith(prefix)) {
                 return line.substring(line.indexOf(":") + 1);
             }
         }
@@ -260,13 +261,12 @@ public class EmailUtils {
 
         String line;
         while ((line = reader.readLine()) != null) {
-            if(line.startsWith("Authorization code:")) {
+            if (line.startsWith("Authorization code:")) {
                 return reader.readLine();
             }
         }
         return null;
     }
-
 
 
     //************* BOOLEAN METHODS *******************

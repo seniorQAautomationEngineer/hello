@@ -21,6 +21,7 @@ import org.testng.annotations.Parameters;
 import org.testng.asserts.SoftAssert;
 
 import com.hellosign.utility.Reports;
+
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -31,12 +32,12 @@ public class BaseUI {
     WebDriver driver;
     WebDriverWait wait;
 
-     HomePage homePage;
-     MainPage mainPage;
-     SignPage signPage;
-     DocumentEditMode documentEditMode;
-     Email email;
-     SoftAssert softAssert = new SoftAssert();
+    HomePage homePage;
+    MainPage mainPage;
+    SignPage signPage;
+    DocumentEditMode documentEditMode;
+    Email email;
+    SoftAssert softAssert = new SoftAssert();
 
     protected TestBox testBox;
     protected TestBrowser testBrowser;
@@ -99,7 +100,7 @@ public class BaseUI {
                         System.out.println("Chrome");
                         WebDriverManager.chromedriver().setup();
                         ChromeOptions chrOptions = new ChromeOptions();
-                        chrOptions.addArguments("disable-infobars", "--disable-popup-blocking", "--allow-running-insecure-content", "--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors","--whitelisted-ips", "--no-sandbox", "--disable-extensions" );
+                        chrOptions.addArguments("disable-infobars", "--disable-popup-blocking", "--allow-running-insecure-content", "--disable-gpu", "--window-size=1920,1200", "--ignore-certificate-errors", "--whitelisted-ips", "--no-sandbox", "--disable-extensions");
                         driver = new ChromeDriver(chrOptions);
                         driver.get("chrome://settings/clearBrowserData");
                         break;
@@ -128,7 +129,7 @@ public class BaseUI {
                         System.out.println("Default");
                         WebDriverManager.chromedriver().setup();
                         ChromeOptions options = new ChromeOptions();
-                        options.addArguments("disable-infobars","--disable-popup-blocking", "--allow-running-insecure-content", "--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors","--whitelisted-ips", "--no-sandbox", "--disable-extensions" );
+                        options.addArguments("disable-infobars", "--disable-popup-blocking", "--allow-running-insecure-content", "--disable-gpu", "--window-size=1920,1200", "--ignore-certificate-errors", "--whitelisted-ips", "--no-sandbox", "--disable-extensions");
                         driver = new ChromeDriver(options);
                         driver.get("chrome://settings/clearBrowserData");
                         break;
@@ -169,8 +170,7 @@ public class BaseUI {
         }
 
 
-
-        wait = new WebDriverWait(driver, 60);
+        wait = new WebDriverWait(driver, 20);
         homePage = new HomePage(driver, wait);
         mainPage = new MainPage(driver, wait);
         signPage = new SignPage(driver, wait);
@@ -183,14 +183,14 @@ public class BaseUI {
 //        PageFactory.initElements(driver, searchPage);
 //        PageFactory.initElements(driver, blogPage);
 
-        driver.get(Data.mainUrl);
-//        if (env.contains("https://app.hellosign.com")) {
-//            driver.get(com.hellosign.data.Data.mainUrl);
-//        } else if (env.contains("uat")) {
-//            driver.get("https://app.hellosign.com");
-//        } else if (env.contains("prod")) {
-//            driver.get("https://app.hellosign.com");
-//        }
+        // driver.get(Data.mainUrl);
+        if (env.contains("qa")) {
+            driver.get(com.hellosign.data.Data.mainUrl);
+        } else if (env.contains("uat")) {
+            driver.get(com.hellosign.data.Data.mainUrl);
+        } else if (env.contains("prod")) {
+            driver.get(com.hellosign.data.Data.mainUrl);
+        }
 
         valueOfBox = box;
     }
@@ -201,7 +201,7 @@ public class BaseUI {
             Reports.fail(driver, testResult.getName());
         }
         Reports.stop();
-     //   driver.quit();
+        //   driver.quit();
     }
 
 

@@ -38,12 +38,13 @@ public class SQLHandler {
         }
         return out;
     }
+
     public static ArrayList<String> getMultipleData(String columnName, String tableName, String[] databasesName, String secondColumnName, HashSet<String> secondData) {
         ArrayList<String> out = new ArrayList<>(200);
         for (int i = 0; i < databasesName.length; i++) {
             try {
                 SQLHandler.connect("org.postgresql.Driver", "jdbc:postgresql://IPaddress:5432/" + databasesName[i], "username", "password");
-                ResultSet rs = SQLHandler.stmt.executeQuery("SELECT " + columnName + ", "+ secondColumnName+ " FROM " + tableName);
+                ResultSet rs = SQLHandler.stmt.executeQuery("SELECT " + columnName + ", " + secondColumnName + " FROM " + tableName);
                 while (rs.next()) {
                     String s = rs.getString(1);
                     if (s != null && secondData.contains(rs.getString(2).trim())) {

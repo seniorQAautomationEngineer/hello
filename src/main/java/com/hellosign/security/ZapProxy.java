@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ZapProxy {
-    com.hellosign.api.ApiRequests apiRequests  = new ApiRequests();
+    com.hellosign.api.ApiRequests apiRequests = new ApiRequests();
 
 
     @Test
@@ -89,7 +89,7 @@ public class ZapProxy {
     public void updateZapCertificate() throws Exception {
 
         File file = new File("rootcert.cer");
-        String  response = apiRequests.zapCertificate("http://localhost:8080/OTHER/core/other/rootcert?apikey=ueueuei");
+        String response = apiRequests.zapCertificate("http://localhost:8080/OTHER/core/other/rootcert?apikey=ueueuei");
         Files.write(Paths.get("rootcert.cer"), response.getBytes(), StandardOpenOption.CREATE);
 
         KeyStore ks = KeyStore.getInstance(KeyStore.getDefaultType());
@@ -131,7 +131,7 @@ public class ZapProxy {
             }
             System.out.println(sites);
             sites = sites.stream()
-                    .filter(s -> (s.contains("myid-dev")))
+                    .filter(s -> (s.contains("domain")))
                     .collect(Collectors.toList());
             Assert.assertTrue(sites.size() > 0);
             System.out.println(sites);
@@ -208,7 +208,7 @@ public class ZapProxy {
     // @Test
     public void sendRequestUsingProxy() throws IOException {
         String cookies = "ExampleOfcookies";
-        System.setProperty("javax.net.ssl.trustStore", "C:\\Program Files\\Java\\jdk1.8.0_191\\jre\\lib\\com.hellosign.security\\cacerts");
+        System.setProperty("javax.net.ssl.trustStore", "C:\\Program Files\\Java\\jdk-13.0.2\\cacerts");
 
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
